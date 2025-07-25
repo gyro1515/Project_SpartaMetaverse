@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TheStackSession;
+using TMPro;
 using TopDownSession;
 using UnityEngine;
 
@@ -8,6 +10,7 @@ namespace MetaverseSession
     public enum UIState
     {
         None,
+        Meta,
         Flappy,
         TopDown,
         Stack,
@@ -26,11 +29,11 @@ namespace MetaverseSession
             instance = this;
 
             // 꺼져있는 애들도 찾아오기 (true)
-            flappyUI = GetComponentInChildren<BaseUI>(true);
+            flappyUI = transform.Find("FlappyUI")?.GetComponent<BaseUI>();
             flappyUI.Init(this);
-            stackUI = GetComponentInChildren<BaseUI>(true);
+            stackUI = transform.Find("StackUI")?.GetComponent<BaseUI>();
             stackUI.Init(this);
-            topDownUI = GetComponentInChildren<BaseUI>(true);
+            topDownUI = transform.Find("TopDownUI")?.GetComponent<BaseUI>();
             topDownUI.Init(this);
 
             ChangeState(UIState.None);
@@ -38,10 +41,14 @@ namespace MetaverseSession
 
         public void ChangeState(UIState state)
         {
+
             currentState = state;
             flappyUI.SetActive(currentState);
             stackUI.SetActive(currentState);
             topDownUI.SetActive(currentState);
+
         }
+        
+
     }
 }

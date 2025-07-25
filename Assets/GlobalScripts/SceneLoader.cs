@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public enum SceneState
 {
+    None,
     Metaverse,
     TopDown,
     FlappyPlane,

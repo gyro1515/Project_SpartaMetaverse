@@ -51,13 +51,10 @@ namespace MetaverseSession
             if (!canMove)
             {
                 Movment(Vector2.zero);
-                Rotate();
+                return;
             }
-            else
-            {
-                Movment(movementDirection);
-                Rotate();
-            }
+            Movment(movementDirection);
+            Rotate();
         }
 
         protected virtual void HandleAction()
@@ -75,6 +72,8 @@ namespace MetaverseSession
         }
         private void Rotate() // 이동 방향에 따른 회전
         {
+            if (_rigidbody.velocity.x == 0) return;
+
             characterRenderer.flipX = _rigidbody.velocity.x < 0; // 좌우 반전만
         }
         

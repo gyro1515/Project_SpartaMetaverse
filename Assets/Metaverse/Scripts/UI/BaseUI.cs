@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace MetaverseSession
 {
-    public abstract class BaseUI : MonoBehaviour
+    public class BaseUI : MonoBehaviour
     {
         protected UIManager uiManager;
 
@@ -22,18 +23,29 @@ namespace MetaverseSession
         }
         public void OnClickEnterButton() // 진입 클릭 시
         {
+            GameManager.instance.player.CanMove = false;
             // 게임진입
             StartCoroutine(NextSceneSequence());
+            //SetActive(UIState.None); // 진입 시 자동으로 끄기
         }
 
 
         public void OnClickCancelButton() // 취소 클릭 시
         {
+            GameManager.instance.player.CanMove = true;
+
             SetActive(UIState.None); // UI 끄기
         }
         
         public void SetActive(UIState state)
         {
+            //Debug.Log($"{state} / {this.state} / {gameObject.name}");
+            if(gameObject == null)
+            {
+                Debug.Log($"언제 호출되냐");
+
+                return;
+            }
             gameObject.SetActive(this.state == state);
         }
         public IEnumerator NextSceneSequence()
