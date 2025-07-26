@@ -1,4 +1,4 @@
-using FlappyPlaneSession;
+ï»¿using FlappyPlaneSession;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,12 +12,12 @@ public enum SceneState
     FlappyPlane,
     TheStack
 }
-// ¾À ÀüÈ¯À» °ü¸®ÇÏ´Â ½ºÅ©¸³Æ®, °ÔÀÓ ½ÃÀÛ ½Ã ÀÚµ¿À¸·Î »ı¼ºµÇ¸ç, ¾À ÀüÈ¯À» ´ã´ç
+// ì”¬ ì „í™˜ì„ ê´€ë¦¬í•˜ëŠ” ìŠ¤í¬ë¦½íŠ¸, ê²Œì„ ì‹œì‘ ì‹œ ìë™ìœ¼ë¡œ ìƒì„±ë˜ë©°, ì”¬ ì „í™˜ì„ ë‹´ë‹¹
 public class SceneLoader : MonoBehaviour
 {
     private static SceneLoader instance;
 
-    // ¿©±â¿¡ ¾Àµé ÇÑ¹ø¿¡ ´Ù Ãß°¡
+    // ì—¬ê¸°ì— ì”¬ë“¤ í•œë²ˆì— ë‹¤ ì¶”ê°€
     private readonly Dictionary<SceneState, string> sceneNames = new()
     {
         { SceneState.Metaverse,   "MetaverseScene" },
@@ -25,37 +25,37 @@ public class SceneLoader : MonoBehaviour
         { SceneState.FlappyPlane, "FlappyPlaneScene" },
         { SceneState.TheStack,    "TheStackScene" }
     };
-    public static bool IsChange { get; private set; } = false; // ¾À ÀüÈ¯ ½Ã ±× ÈÄ »óÈ£ÀÛ¿ë ÀÛµ¿ ¾ÈÇÏµµ·Ï
+    public static bool IsChange { get; private set; } = false; // ì”¬ ì „í™˜ ì‹œ ê·¸ í›„ ìƒí˜¸ì‘ìš© ì‘ë™ ì•ˆí•˜ë„ë¡
 
     
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)] // ÇÏÀÌ¾î¾ÆÅ° Ã¢¿¡ °ÔÀÓ¿ÀºêÁ§Æ®¸¦ ¸¸µéÁö ¾Ê¾Æµµ ÀÚµ¿ »ı¼º
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)] // í•˜ì´ì–´ì•„í‚¤ ì°½ì— ê²Œì„ì˜¤ë¸Œì íŠ¸ë¥¼ ë§Œë“¤ì§€ ì•Šì•„ë„ ìë™ ìƒì„±
     private static void Init()
     {
         if (instance == null)
         {
             GameObject go = new GameObject("SceneLoader");
-            // FadeManager¿Í ´Ù¸¥ ÁøÇà ¹æ½Ä, µÎ ¹æ½Ä ´Ù ÀÌÇØ ÇÊ¿ä
-            go.AddComponent<SceneLoader>(); // ÄÄÆ÷³ÍÆ® Ãß°¡ ½Ã Awake()°¡ È£ÃâµÇ¾î instance°¡ ¼³Á¤µÊ
+            // FadeManagerì™€ ë‹¤ë¥¸ ì§„í–‰ ë°©ì‹, ë‘ ë°©ì‹ ë‹¤ ì´í•´ í•„ìš”
+            go.AddComponent<SceneLoader>(); // ì»´í¬ë„ŒíŠ¸ ì¶”ê°€ ì‹œ Awake()ê°€ í˜¸ì¶œë˜ì–´ instanceê°€ ì„¤ì •ë¨
         }
     }
     private void Awake()
     {
-        if (instance == null) // Ã³À½ AddComponent·Î È£Ãâ ½Ã ¾ÆÁ÷ null, 
+        if (instance == null) // ì²˜ìŒ AddComponentë¡œ í˜¸ì¶œ ì‹œ ì•„ì§ null, 
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-            // BeforeSceneLoad¿¡¼­µµ ¼³Á¤ °¡´ÉÇÏ³ª ¾ÈÁ¤ÀûÀ¸·Î Awake()¿¡¼­ ¼³Á¤
-            // ¶ÇÇÑ OnSceneLoadedÀº staticÀÌ ¾Æ´Ï¹Ç·Î, ÇöÀç ±¸Á¶·Î´Â Initialize()¿¡¼­ ¼³Á¤ ºÒ°¡
+            // BeforeSceneLoadì—ì„œë„ ì„¤ì • ê°€ëŠ¥í•˜ë‚˜ ì•ˆì •ì ìœ¼ë¡œ Awake()ì—ì„œ ì„¤ì •
+            // ë˜í•œ OnSceneLoadedì€ staticì´ ì•„ë‹ˆë¯€ë¡œ, í˜„ì¬ êµ¬ì¡°ë¡œëŠ” Initialize()ì—ì„œ ì„¤ì • ë¶ˆê°€
             SceneManager.sceneLoaded += OnSceneLoaded; 
         }
         else if (instance != this)
         {
-            Destroy(gameObject); // Áßº¹ ¹æÁö
+            Destroy(gameObject); // ì¤‘ë³µ ë°©ì§€
         }
     }
     public static void Load(SceneState state)
     {
-        IsChange = true; // ¾À ÀüÈ¯ ½ÃÀÛ
+        IsChange = true; // ì”¬ ì „í™˜ ì‹œì‘
         SceneManager.LoadScene(instance.sceneNames[state]);
     }
 
@@ -66,13 +66,13 @@ public class SceneLoader : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) 
     {
-        //Debug.Log("¾À ÀüÈ¯ ¿Ï·á");
+        //Debug.Log("ì”¬ ì „í™˜ ì™„ë£Œ");
         IsChange = false;
     }
     public static IEnumerator NextSceneSequence(SceneState nextScene)
     {
-        yield return FadeManager.Instance.FadeOut(); // ÆäÀÌµå ¾Æ¿ô ³¡³ª°í
-        Debug.Log("´ÙÀ½ ¾ÀÀ¸·Î");
+        yield return FadeManager.Instance.FadeOut(); // í˜ì´ë“œ ì•„ì›ƒ ëë‚˜ê³ 
+        Debug.Log("ë‹¤ìŒ ì”¬ìœ¼ë¡œ");
         SceneLoader.Load(nextScene);
     }
 }

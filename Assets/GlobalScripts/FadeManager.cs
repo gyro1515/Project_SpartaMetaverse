@@ -1,30 +1,30 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-// ÆäÀÌµå ÀÎ ¾Æ¿ôÀ» °ü¸®ÇÏ´Â ¸Å´ÏÀú, °ÔÀÓ ½ÃÀÛ ½Ã ÀÚµ¿À¸·Î »ı¼º, ¾À ÀüÈ¯ ½Ã ÆäÀÌµå È¿°ú Àû¿ë
+// í˜ì´ë“œ ì¸ ì•„ì›ƒì„ ê´€ë¦¬í•˜ëŠ” ë§¤ë‹ˆì €, ê²Œì„ ì‹œì‘ ì‹œ ìë™ìœ¼ë¡œ ìƒì„±, ì”¬ ì „í™˜ ì‹œ í˜ì´ë“œ íš¨ê³¼ ì ìš©
 public class FadeManager : MonoBehaviour
 {
     public static FadeManager Instance { get; private set; }
 
     private Image fadeImage;
-    private const float fadeDuration = 0.3f; // ÆäÀÌµå ½Ã°£
+    private const float fadeDuration = 0.3f; // í˜ì´ë“œ ì‹œê°„
 
-    // ÆäÀÌµå ÀÎ ¾Æ¿ô Ã¼Å©¿ë
+    // í˜ì´ë“œ ì¸ ì•„ì›ƒ ì²´í¬ìš©
     [HideInInspector] public bool isFadeOut = false;
 
-    // ÀÚµ¿ ÃÊ±âÈ­
+    // ìë™ ì´ˆê¸°í™”
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void Init()
     {
         if (Instance == null)
         {
             GameObject go = new GameObject("FadeManager");
-            // SceneLoader¿Í ºñ½ÁÇÏÁö¸¸ ´Ù¸¥ ¹æ½Ä
-            // FadeManager ÄÄÆ÷³ÍÆ®¸¦ Ãß°¡ÇÏ¿© ÀÌ ÂüÁ¶ °ªÀ» Instance·Î ¼³Á¤
-            // ¹°·Ğ Instance·Î ¼³Á¤ Àü, Awake()°¡ È£Ãâ µÊ
+            // SceneLoaderì™€ ë¹„ìŠ·í•˜ì§€ë§Œ ë‹¤ë¥¸ ë°©ì‹
+            // FadeManager ì»´í¬ë„ŒíŠ¸ë¥¼ ì¶”ê°€í•˜ì—¬ ì´ ì°¸ì¡° ê°’ì„ Instanceë¡œ ì„¤ì •
+            // ë¬¼ë¡  Instanceë¡œ ì„¤ì • ì „, Awake()ê°€ í˜¸ì¶œ ë¨
             Instance = go.AddComponent<FadeManager>();
             DontDestroyOnLoad(go);
         }
@@ -43,22 +43,22 @@ public class FadeManager : MonoBehaviour
     }
     private void SetupFadeImage()
     {
-        // Äµ¹ö½º »ı¼º
+        // ìº”ë²„ìŠ¤ ìƒì„±
         GameObject canvasGO = new GameObject("FadeCanvas");
-        canvasGO.transform.SetParent(this.transform); // FadeManagerÀÇ ÀÚ½ÄÀ¸·Î ¼³Á¤
+        canvasGO.transform.SetParent(this.transform); // FadeManagerì˜ ìì‹ìœ¼ë¡œ ì„¤ì •
         Canvas canvas = canvasGO.AddComponent<Canvas>();
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        canvas.sortingOrder = 999; // UI ¸Ç À§¿¡ Ç¥½Ã
+        canvas.sortingOrder = 999; // UI ë§¨ ìœ„ì— í‘œì‹œ
 
-        // ÀÌ¹ÌÁö »ı¼º
+        // ì´ë¯¸ì§€ ìƒì„±
         GameObject imgGO = new GameObject("FadeImage");
         imgGO.transform.SetParent(canvasGO.transform);
         fadeImage = imgGO.AddComponent<Image>();
         fadeImage.color = new Color(0, 0, 0, 0);
-        fadeImage.raycastTarget = true; // Å¬¸¯ ÀÌº¥Æ®¸¦ ¹Şµµ·Ï ¼³Á¤ÇÏ¿©, 
-                                        // ÆäÀÌµå ¾Æ¿ô Áß¿¡´Â ´Ù¸¥ UI »óÈ£ÀÛ¿ëÀ» ¸·±â
+        fadeImage.raycastTarget = true; // í´ë¦­ ì´ë²¤íŠ¸ë¥¼ ë°›ë„ë¡ ì„¤ì •í•˜ì—¬, 
+                                        // í˜ì´ë“œ ì•„ì›ƒ ì¤‘ì—ëŠ” ë‹¤ë¥¸ UI ìƒí˜¸ì‘ìš©ì„ ë§‰ê¸°
 
-        // Ç®½ºÅ©¸° ¼³Á¤
+        // í’€ìŠ¤í¬ë¦° ì„¤ì •
         RectTransform rt = fadeImage.rectTransform;
         rt.anchorMin = Vector2.zero;
         rt.anchorMax = Vector2.one;
@@ -66,8 +66,8 @@ public class FadeManager : MonoBehaviour
         rt.offsetMax = Vector2.zero;
     }
 
-    // ¾Æ·¡ ÇÔ¼öµéµµ staticÀ¸·Î ¼³Á¤ °¡´ÉÇÏ³ª, ´Ù instance.À» ºÙ¿© »ç¿ëÇØ¾ß ÇÔ
-    // µû¶ó¼­ ÀÎ½ºÅÏ½º ¸Ş¼Òµå·Î ¼³Á¤ -> FadeManager.Instance.FadeOut()À¸·Î »ç¿ë
+    // ì•„ë˜ í•¨ìˆ˜ë“¤ë„ staticìœ¼ë¡œ ì„¤ì • ê°€ëŠ¥í•˜ë‚˜, ë‹¤ instance.ì„ ë¶™ì—¬ ì‚¬ìš©í•´ì•¼ í•¨
+    // ë”°ë¼ì„œ ì¸ìŠ¤í„´ìŠ¤ ë©”ì†Œë“œë¡œ ì„¤ì • -> FadeManager.Instance.FadeOut()ìœ¼ë¡œ ì‚¬ìš©
     public IEnumerator FadeOut()
     {
         //Debug.Log("FadeOut");
