@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// 페이드 인 아웃을 관리하는 매니저, 게임 시작 시 자동으로 생성, 씬 전환 시 페이드 효과 적용
 public class FadeManager : MonoBehaviour
 {
     public static FadeManager Instance { get; private set; }
 
-    [SerializeField] private Image fadeImage;
-    [SerializeField] private float fadeDuration = 0.3f; // 페이드 시간
+    private Image fadeImage;
+    private const float fadeDuration = 0.3f; // 페이드 시간
 
     // 페이드 인 아웃 체크용
     [HideInInspector] public bool isFadeOut = false;
@@ -21,6 +22,9 @@ public class FadeManager : MonoBehaviour
         if (Instance == null)
         {
             GameObject go = new GameObject("FadeManager");
+            // SceneLoader와 비슷하지만 다른 방식
+            // FadeManager 컴포넌트를 추가하여 이 참조 값을 Instance로 설정
+            // 물론 Instance로 설정 전, Awake()가 호출 됨
             Instance = go.AddComponent<FadeManager>();
             DontDestroyOnLoad(go);
         }
@@ -51,7 +55,8 @@ public class FadeManager : MonoBehaviour
         imgGO.transform.SetParent(canvasGO.transform);
         fadeImage = imgGO.AddComponent<Image>();
         fadeImage.color = new Color(0, 0, 0, 0);
-        fadeImage.raycastTarget = true;
+        fadeImage.raycastTarget = true; // 클릭 이벤트를 받도록 설정하여, 
+                                        // 페이드 아웃 중에는 다른 UI 상호작용을 막기
 
         // 풀스크린 설정
         RectTransform rt = fadeImage.rectTransform;
@@ -61,6 +66,8 @@ public class FadeManager : MonoBehaviour
         rt.offsetMax = Vector2.zero;
     }
 
+    // 아래 함수들도 static으로 설정 가능하나, 다 instance.을 붙여 사용해야 함
+    // 따라서 인스턴스 메소드로 설정 -> FadeManager.Instance.FadeOut()으로 사용
     public IEnumerator FadeOut()
     {
         //Debug.Log("FadeOut");

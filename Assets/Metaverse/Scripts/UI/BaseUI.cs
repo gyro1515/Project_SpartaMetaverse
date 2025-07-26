@@ -25,7 +25,7 @@ namespace MetaverseSession
         {
             GameManager.instance.player.CanMove = false;
             // 게임진입
-            StartCoroutine(NextSceneSequence());
+            StartCoroutine(SceneLoader.NextSceneSequence(nextScene));
             //SetActive(UIState.None); // 진입 시 자동으로 끄기
         }
 
@@ -41,11 +41,6 @@ namespace MetaverseSession
         {
             gameObject.SetActive(this.state == state);
         }
-        public IEnumerator NextSceneSequence()
-        {
-            yield return FadeManager.Instance.FadeOut(); // 페이드 아웃 끝나고
-            Debug.Log("다음 씬으로");
-            SceneLoader.Load(nextScene);
-        }
+        
     }
 }

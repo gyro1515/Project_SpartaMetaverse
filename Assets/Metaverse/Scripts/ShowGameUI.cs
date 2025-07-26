@@ -13,7 +13,7 @@ namespace MetaverseSession
             if (collision.gameObject.layer == 6) // 플레이어일 때만, 태그로 변경?
             {
                 UIManager.instance.ChangeState(uiState);
-                GameManager.instance.player.CanMove = false;
+                //GameManager.instance.player.CanMove = false;
 
             }
         }
