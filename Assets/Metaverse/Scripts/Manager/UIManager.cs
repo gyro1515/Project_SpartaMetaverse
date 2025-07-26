@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TheStackSession;
 using TMPro;
 using TopDownSession;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace MetaverseSession
@@ -43,6 +44,12 @@ namespace MetaverseSession
         {
 
             currentState = state;
+            // 씬 전환시 OnTriggerExit2D가 호출되면서 파괴된 오브젝트에 접근 할 수 있음
+            if (flappyUI.gameObject.IsDestroyed() || stackUI.gameObject.IsDestroyed() || topDownUI.gameObject.IsDestroyed())
+            {
+                Debug.Log("파괴된 UI 오브젝트 호출");
+                return;
+            }
             flappyUI.SetActive(currentState);
             stackUI.SetActive(currentState);
             topDownUI.SetActive(currentState);

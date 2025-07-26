@@ -9,24 +9,56 @@ public class FadeManager : MonoBehaviour
     public static FadeManager Instance { get; private set; }
 
     [SerializeField] private Image fadeImage;
-    [SerializeField] private float fadeDuration = 1f;
+    [SerializeField] private float fadeDuration = 0.3f; // 페이드 시간
 
     // 페이드 인 아웃 체크용
     [HideInInspector] public bool isFadeOut = false;
 
-    private void Awake()
+    // 자동 초기화
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void Init()
     {
-        // 싱글턴 초기화
         if (Instance == null)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject); // 씬 전환 시에도 유지
+            GameObject go = new GameObject("FadeManager");
+            Instance = go.AddComponent<FadeManager>();
+            DontDestroyOnLoad(go);
         }
-        else
+    }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
             return;
         }
+
+        if (fadeImage == null)
+            SetupFadeImage();
+    }
+    private void SetupFadeImage()
+    {
+        // 캔버스 생성
+        GameObject canvasGO = new GameObject("FadeCanvas");
+        canvasGO.transform.SetParent(this.transform); // FadeManager의 자식으로 설정
+        Canvas canvas = canvasGO.AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.sortingOrder = 999; // UI 맨 위에 표시
+
+        // 이미지 생성
+        GameObject imgGO = new GameObject("FadeImage");
+        imgGO.transform.SetParent(canvasGO.transform);
+        fadeImage = imgGO.AddComponent<Image>();
+        fadeImage.color = new Color(0, 0, 0, 0);
+        fadeImage.raycastTarget = true;
+
+        // 풀스크린 설정
+        RectTransform rt = fadeImage.rectTransform;
+        rt.anchorMin = Vector2.zero;
+        rt.anchorMax = Vector2.one;
+        rt.offsetMin = Vector2.zero;
+        rt.offsetMax = Vector2.zero;
     }
 
     public IEnumerator FadeOut()

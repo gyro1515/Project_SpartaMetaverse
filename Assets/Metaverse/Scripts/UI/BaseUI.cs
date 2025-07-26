@@ -39,13 +39,6 @@ namespace MetaverseSession
         
         public void SetActive(UIState state)
         {
-            //Debug.Log($"{state} / {this.state} / {gameObject.name}");
-            if(gameObject == null)
-            {
-                Debug.Log($"언제 호출되냐");
-
-                return;
-            }
             gameObject.SetActive(this.state == state);
         }
         public IEnumerator NextSceneSequence()
