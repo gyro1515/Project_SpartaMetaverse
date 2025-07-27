@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,17 +17,20 @@ namespace FlappyPlaneSession
         public bool isFlap = false;
 
         public bool godMode = false;
+        private bool isSatart = false; // ê²Œì„ ì‹œì‘ ì—¬ë¶€
 
         GameManager gameManager;
-
+        
         // Start is called before the first frame update
         void Start()
         {
             gameManager = GameManager.Instance;
 
-            // ÇÏÀ§ ÄÄÆ÷³ÍÆ®±îÁö Ã£±â
+            // í•˜ìœ„ ì»´í¬ë„ŒíŠ¸ê¹Œì§€ ì°¾ê¸°
             animator = GetComponentInChildren<Animator>();
             _rigidbody = GetComponent<Rigidbody2D>();
+            isSatart = false;
+            _rigidbody.gravityScale = 0f; // ê²Œì„ ì‹œì‘ ì „ ì¤‘ë ¥ ë¹„í™œì„±í™”
             if (animator == null)
             {
                 Debug.Log("Not anim");
@@ -41,11 +44,12 @@ namespace FlappyPlaneSession
         // Update is called once per frame
         void Update()
         {
+            if (!isSatart) return;
             if (isDead)
             {
                 if (deathCooldown <= 0f)
                 {
-                    // °ÔÀÓ Àç½ÃÀÛ
+                    // ê²Œì„ ì¬ì‹œì‘
                     if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
                     {
                         gameManager.RestartGame();
@@ -58,16 +62,18 @@ namespace FlappyPlaneSession
             }
             else
             {
-                // Input.GetMouseButtonDown(0) -> 0Àº ÅÍÄ¡µµ °¡´ÉÇÏµµ·Ï
+                // Input.GetMouseButtonDown(0) -> 0ì€ í„°ì¹˜ë„ ê°€ëŠ¥í•˜ë„ë¡
                 if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
                 {
                     isFlap = true;
                 }
             }
         }
-        // ¹°¸® ¿¬»êÀÌ ÇÊ¿äÇÒ ¶§ ÀÏÁ¤ÇÑ °£°İÀ¸·Î È£Ãâ
+        // ë¬¼ë¦¬ ì—°ì‚°ì´ í•„ìš”í•  ë•Œ ì¼ì •í•œ ê°„ê²©ìœ¼ë¡œ í˜¸ì¶œ
         private void FixedUpdate()
         {
+            if (!isSatart) return;
+
             if (isDead) return;
 
             Vector3 velocity = _rigidbody.velocity;
@@ -87,6 +93,8 @@ namespace FlappyPlaneSession
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
+            if (!isSatart) return;
+
             if (godMode || isDead) return;
 
             isDead = true;
@@ -94,6 +102,11 @@ namespace FlappyPlaneSession
             animator.SetInteger("IsDie", 1);
             gameManager.GameOver();
 
+        }
+        public void GameStart()
+        {
+            isSatart = true;
+            _rigidbody.gravityScale = 1f; // ê²Œì„ ì‹œì‘ì‹œ ì¤‘ë ¥ í™œì„±í™”
         }
     }
 }

@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,7 +24,9 @@ namespace TopDownSession
 
         public void OnClickExitButton()
         {
-            Application.Quit();
+            //Application.Quit();
+            GameManager.isFirstLoading = true; // 돌아가면 처음부터 다시 시작
+            StartCoroutine(SceneLoader.NextSceneSequence(SceneState.Metaverse));
         }
 
         protected override UIState GetUIState()

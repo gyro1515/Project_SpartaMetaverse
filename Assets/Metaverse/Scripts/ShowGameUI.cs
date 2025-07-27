@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,7 +10,7 @@ namespace MetaverseSession
         [SerializeField] UIState uiState;
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.gameObject.layer == 6) // ÇÃ·¹ÀÌ¾îÀÏ ¶§¸¸, ÅÂ±×·Î º¯°æ?
+            if (collision.gameObject.layer == 6) // í”Œë ˆì´ì–´ì¼ ë•Œë§Œ, íƒœê·¸ë¡œ ë³€ê²½?
             {
                 UIManager.instance.ChangeState(uiState);
                 //GameManager.instance.player.CanMove = false;
@@ -19,11 +19,11 @@ namespace MetaverseSession
         }
         private void OnTriggerExit2D(Collider2D collision)
         {
-            // ¾À ÀüÈ¯½Ã OnTriggerExit2D°¡ È£ÃâµÇ¸é¼­ ÆÄ±«µÈ ¿ÀºêÁ§Æ®¿¡ Á¢±Ù ÇÒ ¼ö ÀÖÀ½
+            // ì”¬ ì „í™˜ì‹œ OnTriggerExit2Dê°€ í˜¸ì¶œë˜ë©´ì„œ íŒŒê´´ëœ ì˜¤ë¸Œì íŠ¸ì— ì ‘ê·¼ í•  ìˆ˜ ìˆìŒ
             if (SceneLoader.IsChange)
             {
-                Debug.Log("ÆÄ±«µÈ UIManager ¿ÀºêÁ§Æ® È£Ãâ");
-                return; // ¾À ÀüÈ¯ Áß¿¡´Â ¹«½ÃÇÏµµ·Ï
+                //Debug.Log("íŒŒê´´ëœ UIManager ì˜¤ë¸Œì íŠ¸ í˜¸ì¶œ");
+                return; // ì”¬ ì „í™˜ ì¤‘ì—ëŠ” ë¬´ì‹œí•˜ë„ë¡
             }
 
             if (collision.gameObject.layer == 6)

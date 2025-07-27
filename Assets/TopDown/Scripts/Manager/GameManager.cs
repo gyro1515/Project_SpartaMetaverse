@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +16,8 @@ namespace TopDownSession
         private EnemyManager enemyManager;
         private UIManager uiManager;
         public static bool isFirstLoading = true;
-
+        private const string BestScoreKey = "TopDownBestScore";
+        private const string CurScoreKey = "TopDownCurScore";
 
         private void Awake()
         {
@@ -69,8 +70,15 @@ namespace TopDownSession
 
         public void GameOver()
         {
+            int bestScore = PlayerPrefs.GetInt(BestScoreKey, 0);
+            if (currentWaveIndex > bestScore)
+            {
+                PlayerPrefs.SetInt(BestScoreKey, currentWaveIndex);
+            }
+            PlayerPrefs.SetInt(CurScoreKey, currentWaveIndex);
             enemyManager.StopWave();
             uiManager.SetGameOver();
+
         }
 
     }

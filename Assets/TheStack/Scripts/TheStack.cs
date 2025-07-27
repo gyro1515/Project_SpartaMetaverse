@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,7 +29,7 @@ namespace TheStackSession
         public int Combo { get { return comboCount; } }
 
         private int maxCombo = 0;
-        public int MaxCombo { get => maxCombo; } // ¶÷´Ù·Îµµ ¸®ÅÏ °¡´É
+        public int MaxCombo { get => maxCombo; } // ëŒë‹¤ë¡œë„ ë¦¬í„´ ê°€ëŠ¥
 
         public Color prevColor;
         public Color nextColor;
@@ -42,7 +42,8 @@ namespace TheStackSession
         int bestCombo = 0;
         public int BestCombo { get => bestCombo; }
 
-        private const string BestScoreKey = "BestScore";
+        private const string BestScoreKey = "StackBestScore";
+        private const string CurScoreKey = "StackCurScore";
         private const string BestComboKey = "BestCombo";
 
         private bool isGameOver = true;
@@ -63,7 +64,7 @@ namespace TheStackSession
             nextColor = GetRandomColor();
 
             prevBlockPosition = Vector3.down;
-            // ¸Ç Ã³À½ ºí·Ï ÇÏ³ª ¼ÒÈ¯
+            // ë§¨ ì²˜ìŒ ë¸”ë¡ í•˜ë‚˜ ì†Œí™˜
             Spawn_Block();
             Spawn_Block();
         }
@@ -80,7 +81,7 @@ namespace TheStackSession
                 }
                 else
                 {
-                    // °ÔÀÓ ¿À¹ö
+                    // ê²Œì„ ì˜¤ë²„
                     Debug.Log("GameOver");
                     UpdateScore();
                     isGameOver = true;
@@ -95,7 +96,7 @@ namespace TheStackSession
 
         bool Spawn_Block()
         {
-            // ÀÌÀüºí·° ÀúÀå
+            // ì´ì „ë¸”ëŸ­ ì €ì¥
             if (lastBlock != null)
                 prevBlockPosition = lastBlock.localPosition;
 
@@ -111,7 +112,7 @@ namespace TheStackSession
             }
             ColorChange(newBlock);
 
-            // ÂüÁ¶ ³Ñ°ÜÁÖ±â(ÀÛ¾÷ ÆíÀÇ¼ºÀ» À§ÇØ)
+            // ì°¸ì¡° ë„˜ê²¨ì£¼ê¸°(ì‘ì—… í¸ì˜ì„±ì„ ìœ„í•´)
             newTrans = newBlock.transform;
             newTrans.parent = transform;
             newTrans.localPosition = prevBlockPosition + Vector3.up;
@@ -124,7 +125,7 @@ namespace TheStackSession
             blockTransition = 0f;
 
             lastBlock = newTrans;
-            // x, zÃàÀ¸·Î ¹ø°¥¾Æ°¡¸é¼­ ÀÌµ¿ÇÏ°Ô ÇÏ±â
+            // x, zì¶•ìœ¼ë¡œ ë²ˆê°ˆì•„ê°€ë©´ì„œ ì´ë™í•˜ê²Œ í•˜ê¸°
             isMovingX = !isMovingX;
 
             UIManager.Instance.UpdateScore();
@@ -152,7 +153,7 @@ namespace TheStackSession
             }
 
             rn.material.color = applyColor;
-            // ºí·Ï°ú ¹è°æÀÇ »ö ±¸ºĞÀ» À§ÇØ, ¹è°æÀº Á» ¾îµÓ°Ô
+            // ë¸”ë¡ê³¼ ë°°ê²½ì˜ ìƒ‰ êµ¬ë¶„ì„ ìœ„í•´, ë°°ê²½ì€ ì¢€ ì–´ë‘¡ê²Œ
             Camera.main.backgroundColor = applyColor - new Color(0.1f, 0.1f, 0.1f);
 
             if (applyColor.Equals(nextColor) == true)
@@ -169,11 +170,11 @@ namespace TheStackSession
 
             if (isMovingX)
             {
-                // °­ÀÇ ¿µ»ó ÇØ¼³ Àß¸øµÈ°Å °°À½
-                // MovingBoundsSize: ¾ó¸¸Å­ ÀÌµ¿ÀÌ °¡´ÉÇÑ°¡ 
-                // ±âÁ¸ ¼ÒÈ¯µÈ ºí·ÏÀÌ ÀÌµ¿ÇÒ ¼ö ÀÖ´Â ¹üÀ§
-                // -> BoundSize = ºí·Ï »çÀÌÁî´Ï±î ¹üÀ§´Â ºí·Ï »çÀÌÁî ¸¸Å­
-                // MovingBoundsSize = 3ÀÏ ½Ã
+                // ê°•ì˜ ì˜ìƒ í•´ì„¤ ì˜ëª»ëœê±° ê°™ìŒ
+                // MovingBoundsSize: ì–¼ë§Œí¼ ì´ë™ì´ ê°€ëŠ¥í•œê°€ 
+                // ê¸°ì¡´ ì†Œí™˜ëœ ë¸”ë¡ì´ ì´ë™í•  ìˆ˜ ìˆëŠ” ë²”ìœ„
+                // -> BoundSize = ë¸”ë¡ ì‚¬ì´ì¦ˆë‹ˆê¹Œ ë²”ìœ„ëŠ” ë¸”ë¡ ì‚¬ì´ì¦ˆ ë§Œí¼
+                // MovingBoundsSize = 3ì¼ ì‹œ
                 // 
                 lastBlock.localPosition = new Vector3(movePosition * MovingBoundsSize, stackCount, secondaryPosition);
             }
@@ -197,23 +198,23 @@ namespace TheStackSession
                     stackBounds.x -= deltaX;
                     if (stackBounds.x <= 0)
                     {
-                        return false; // ¸ø ¿Ã·Á ³õ´Â °æ¿ì
+                        return false; // ëª» ì˜¬ë ¤ ë†“ëŠ” ê²½ìš°
                     }
-                    // ³õ´Â ºí·ÏÀ» ¹èÄ¡ÇÏ°í Æ¢¾î³ª¿Â ºÎºĞÀ» ÀÚ¸£±â
-                    // ÀÚ¸¥ ÈÄÀÇ Áß½ÉÁ¡
+                    // ë†“ëŠ” ë¸”ë¡ì„ ë°°ì¹˜í•˜ê³  íŠ€ì–´ë‚˜ì˜¨ ë¶€ë¶„ì„ ìë¥´ê¸°
+                    // ìë¥¸ í›„ì˜ ì¤‘ì‹¬ì 
                     float middle = (prevBlockPosition.x + lastPosition.x) / 2;
-                    // Æ¢¾î³ª¿Â ºÎºĞ ÀÚ¸£´Â ºÎºĞ¿¡ ÇØ´ç
+                    // íŠ€ì–´ë‚˜ì˜¨ ë¶€ë¶„ ìë¥´ëŠ” ë¶€ë¶„ì— í•´ë‹¹
                     lastBlock.localScale = new Vector3(stackBounds.x, 1, stackBounds.y);
 
                     Vector3 tempPosition = lastBlock.localPosition;
                     tempPosition.x = middle;
-                    // lastPositionÀº ¾îÂ÷ÇÇ ¹ö¸±°Çµ¥ ¿Ö...?
-                    // ·¯±× »ı¼º¿¡ ¾²ÀÓ
+                    // lastPositionì€ ì–´ì°¨í”¼ ë²„ë¦´ê±´ë° ì™œ...?
+                    // ëŸ¬ê·¸ ìƒì„±ì— ì“°ì„
                     lastBlock.localPosition = lastPosition = tempPosition;
 
-                    // ·¯±× »ı¼º
+                    // ëŸ¬ê·¸ ìƒì„±
                     float rubbleHalfScale = deltaX / 2f;
-                    // ·¯±×ÀÇ Áß½É ±¸ÇØ¼­ ³Ö±â, ·¯±×ÀÇ »çÀÌÁî´Â deltaX
+                    // ëŸ¬ê·¸ì˜ ì¤‘ì‹¬ êµ¬í•´ì„œ ë„£ê¸°, ëŸ¬ê·¸ì˜ ì‚¬ì´ì¦ˆëŠ” deltaX
                     CreateRubble(
                         new Vector3(isNegativeNum
                                 ? lastPosition.x + stackBounds.x / 2 + rubbleHalfScale
@@ -225,7 +226,7 @@ namespace TheStackSession
 
                     comboCount = 0;
                 }
-                else // 0.1Â÷ÀÌ±îÁö´Â ±×³É À§¿¡´Ù ³õ±â
+                else // 0.1ì°¨ì´ê¹Œì§€ëŠ” ê·¸ëƒ¥ ìœ„ì—ë‹¤ ë†“ê¸°
                 {
                     ComboCheck();
                     lastBlock.localPosition = prevBlockPosition + Vector3.up;
@@ -271,7 +272,7 @@ namespace TheStackSession
                     lastBlock.localPosition = prevBlockPosition + Vector3.up;
                 }
             }
-            //ÀÌÀü ºí·ÏÀÇ Áß½ÉÀÌ ¹Ù²î¾ú±â ¶§¹®¿¡, ÀÌ °ª ±âÁØÀ¸·Î ºí·ÏÀÌ ¿òÁ÷ÀÌµµ·Ï ¼¼ÆÃ
+            //ì´ì „ ë¸”ë¡ì˜ ì¤‘ì‹¬ì´ ë°”ë€Œì—ˆê¸° ë•Œë¬¸ì—, ì´ ê°’ ê¸°ì¤€ìœ¼ë¡œ ë¸”ë¡ì´ ì›€ì§ì´ë„ë¡ ì„¸íŒ…
             secondaryPosition = isMovingX ? lastBlock.localPosition.x : lastBlock.localPosition.z;
 
             return true;
@@ -305,17 +306,19 @@ namespace TheStackSession
                     stackBounds.y > BoundSize ? BoundSize : stackBounds.y;
             }
         }
-        void UpdateScore()
+        public void UpdateScore()
         {
             if (bestScore < stackCount)
             {
-                Debug.Log("ÃÖ°í Á¡¼ö °»½Å");
+                Debug.Log("ìµœê³  ì ìˆ˜ ê°±ì‹ ");
                 bestScore = stackCount;
                 bestCombo = maxCombo;
 
                 PlayerPrefs.SetInt(BestScoreKey, bestScore);
                 PlayerPrefs.SetInt(BestComboKey, bestCombo);
             }
+            // í˜„ì¬ ì ìˆ˜ ì €ì¥
+            PlayerPrefs.SetInt(CurScoreKey, stackCount);
         }
         void GameOverEffect()
         {

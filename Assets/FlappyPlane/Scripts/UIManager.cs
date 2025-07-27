@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -9,6 +9,8 @@ namespace FlappyPlaneSession
     {
         public TextMeshProUGUI scoreText;
         public TextMeshProUGUI restartText;
+        public GameObject StartUI;
+
 
         public void Start()
         {

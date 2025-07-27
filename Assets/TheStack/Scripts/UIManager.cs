@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
@@ -22,7 +22,6 @@ namespace TheStackSession
                 return instance;
             }
         }
-
         UIState currentState = UIState.Home;
 
         HomeUI homeUI = null;
@@ -64,11 +63,14 @@ namespace TheStackSession
 
         public void OnClickExit()
         {
-            // ÀüÃ³¸®±â ¼¼ÆÃ
-#if UNITY_EDITOR // À¯´ÏÆ¼ ¿¡µğÅÍ »óÅÂ¶ó¸é
-            UnityEditor.EditorApplication.isPlaying = false; // À¯´ÏÆ¼ ¿¡µğÅÍ ÇÃ·¹ÀÌ ²ô±â
+            // ì „ì²˜ë¦¬ê¸° ì„¸íŒ…
+#if UNITY_EDITOR // ìœ ë‹ˆí‹° ì—ë””í„° ìƒíƒœë¼ë©´
+            //UnityEditor.EditorApplication.isPlaying = false; // ìœ ë‹ˆí‹° ì—ë””í„° í”Œë ˆì´ ë„ê¸°
+            //theStack.UpdateScore(); // í•œ ë²ˆì€ ê²Œì„ì„ ì‹œì‘í•˜ê²Œ í•˜ê¸°
+            StartCoroutine(SceneLoader.NextSceneSequence(SceneState.Metaverse));
+
 #else
-        Application.Quit(); // ¾îÇÃ¸®ÄÉÀÌ¼Ç Á¾·á
+        Application.Quit(); // ì–´í”Œë¦¬ì¼€ì´ì…˜ ì¢…ë£Œ
 #endif
         }
 

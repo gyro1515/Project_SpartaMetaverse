@@ -1,4 +1,4 @@
-using System.Collections;
+Ôªøusing System.Collections;
 using System.Collections.Generic;
 using TheStackSession;
 using TMPro;
@@ -23,39 +23,69 @@ namespace MetaverseSession
         BaseUI flappyUI;
         BaseUI stackUI;
         BaseUI topDownUI;
-        private UIState currentState;
+        FinishUI finishUI;
+        private static UIState currentState = UIState.None;
 
         private void Awake()
         {
             instance = this;
 
-            // ≤®¡Æ¿÷¥¬ æ÷µÈµµ √£æ∆ø¿±‚ (true)
+            // Í∫ºÏ†∏ÏûàÎäî Ïï†Îì§ÎèÑ Ï∞æÏïÑÏò§Í∏∞ (true)
             flappyUI = transform.Find("FlappyUI")?.GetComponent<BaseUI>();
             flappyUI.Init(this);
             stackUI = transform.Find("StackUI")?.GetComponent<BaseUI>();
             stackUI.Init(this);
             topDownUI = transform.Find("TopDownUI")?.GetComponent<BaseUI>();
             topDownUI.Init(this);
+            finishUI = transform.Find("FinishUI")?.GetComponent<FinishUI>();
+            finishUI.Init(this);
 
-            ChangeState(UIState.None);
+            // Í≤∞Í≥º UI Ïï°Ìã∞Î∏å
+            if(currentState != UIState.None)
+            {
+                finishUI.gameObject.SetActive(true);
+            }
+            else
+            {
+                finishUI.gameObject.SetActive(false);
+            }
+            // Î®ºÏ†Ä currentStateÏ≤¥ÌÅ¨ ÌõÑ ÏÑ∏ÌåÖ
+            ChangeState(UIState.None); 
+
         }
 
         public void ChangeState(UIState state)
         {
-
             currentState = state;
-            // æ¿ ¿¸»ØΩ√ OnTriggerExit2D∞° »£√‚µ«∏Èº≠ ∆ƒ±´µ» ø¿∫Í¡ß∆Æø° ¡¢±Ÿ «“ ºˆ ¿÷¿Ω
-            if (flappyUI.gameObject.IsDestroyed() || stackUI.gameObject.IsDestroyed() || topDownUI.gameObject.IsDestroyed())
-            {
-                Debug.Log("∆ƒ±´µ» UI ø¿∫Í¡ß∆Æ »£√‚");
-                return;
-            }
             flappyUI.SetActive(currentState);
             stackUI.SetActive(currentState);
             topDownUI.SetActive(currentState);
-
         }
-        
+        public void GetScore(out int curScore, out int bestScore)
+        {
+            string bestScoreK = "";
+            string curScoreK = "";
+            switch (currentState)
+            {
+                case UIState.Flappy:
+                    bestScoreK = "FlappyBestScore";
+                    curScoreK = "FlappyCurScore";
+                    break;
+                case UIState.TopDown:
+                    bestScoreK = "TopDownBestScore";
+                    curScoreK = "TopDownCurScore";
+                    break;
+                case UIState.Stack:
+                    bestScoreK = "StackBestScore";
+                    curScoreK = "StackCurScore";
+                    break;
+                default:
+                    break;
+            }
+            curScore = PlayerPrefs.GetInt(curScoreK, 0);
+            bestScore = PlayerPrefs.GetInt(bestScoreK, 0);
+        }
+
 
     }
 }
