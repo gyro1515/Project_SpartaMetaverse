@@ -67,6 +67,8 @@ namespace TheStackSession
             // 맨 처음 블록 하나 소환
             Spawn_Block();
             Spawn_Block();
+            // Stack씬이 먼저 실행되더라도 메타 버스 UI 결과 출력되도록
+            MetaverseSession.UIManager.CurrentState = MetaverseSession.UIState.Stack;
         }
 
         void Update()

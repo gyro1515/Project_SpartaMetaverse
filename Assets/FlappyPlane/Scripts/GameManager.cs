@@ -35,6 +35,8 @@ namespace FlappyPlaneSession
         {
             StartCoroutine(FadeManager.Instance.FadeIn());
             uiManager.UpdateScore(0);
+            // Flappy씬이 먼저 실행되더라도 메타 버스 UI 결과 출력되도록
+            MetaverseSession.UIManager.CurrentState = MetaverseSession.UIState.Flappy; 
         }
         public void GameOver()
         {

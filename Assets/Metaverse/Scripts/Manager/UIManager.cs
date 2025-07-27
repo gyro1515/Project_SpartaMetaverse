@@ -25,6 +25,14 @@ namespace MetaverseSession
         BaseUI topDownUI;
         FinishUI finishUI;
         private static UIState currentState = UIState.None;
+        public static UIState CurrentState
+        {
+            get { return currentState; }
+            set
+            {
+                currentState = value;
+            }
+        }
 
         private void Awake()
         {
