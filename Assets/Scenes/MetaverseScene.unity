@@ -235,7 +235,7 @@ Tilemap:
       - {fileID: 21300000, guid: 3f166beb2176b1a4d834b6843a579189, type: 3}
       - {fileID: 21300000, guid: ab155b401c693764cae000e7b61da322, type: 3}
       - {fileID: 21300000, guid: 48823265a8bb12b4faf33ddb5b770254, type: 3}
-      m_AnimationSpeed: 3.7594743
+      m_AnimationSpeed: 4.9814796
       m_AnimationTimeOffset: 0
       m_Flags: 0
   m_TileAssetArray:
@@ -26054,7 +26054,7 @@ Tilemap:
       - {fileID: 21300000, guid: 3f166beb2176b1a4d834b6843a579189, type: 3}
       - {fileID: 21300000, guid: ab155b401c693764cae000e7b61da322, type: 3}
       - {fileID: 21300000, guid: 48823265a8bb12b4faf33ddb5b770254, type: 3}
-      m_AnimationSpeed: 4.342869
+      m_AnimationSpeed: 4.17264
       m_AnimationTimeOffset: 0
       m_Flags: 0
   m_TileAssetArray:
