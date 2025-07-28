@@ -235,7 +235,7 @@ Tilemap:
       - {fileID: 21300000, guid: 3f166beb2176b1a4d834b6843a579189, type: 3}
       - {fileID: 21300000, guid: ab155b401c693764cae000e7b61da322, type: 3}
       - {fileID: 21300000, guid: 48823265a8bb12b4faf33ddb5b770254, type: 3}
-      m_AnimationSpeed: 3.2281275
+      m_AnimationSpeed: 4.5436583
       m_AnimationTimeOffset: 0
       m_Flags: 0
   m_TileAssetArray:
@@ -26054,7 +26054,7 @@ Tilemap:
       - {fileID: 21300000, guid: 3f166beb2176b1a4d834b6843a579189, type: 3}
       - {fileID: 21300000, guid: ab155b401c693764cae000e7b61da322, type: 3}
       - {fileID: 21300000, guid: 48823265a8bb12b4faf33ddb5b770254, type: 3}
-      m_AnimationSpeed: 4.6820145
+      m_AnimationSpeed: 3.9143972
       m_AnimationTimeOffset: 0
       m_Flags: 0
   m_TileAssetArray:
@@ -26145,6 +26145,53 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0
   m_UseDelaunayMesh: 0
+--- !u!1 &1951975629
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1951975630}
+  - component: {fileID: 1951975631}
+  m_Layer: 0
+  m_Name: RenderSort
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1951975630
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951975629}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1951975631
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951975629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e547c8eac89dda640af433d59f8e1b29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderers:
+  - {fileID: 1871959066}
+  - {fileID: 5456257}
 --- !u!1 &1971335427
 GameObject:
   m_ObjectHideFlags: 0
@@ -26755,3 +26802,4 @@ SceneRoots:
   - {fileID: 1076077105}
   - {fileID: 111192625}
   - {fileID: 1971335430}
+  - {fileID: 1951975630}

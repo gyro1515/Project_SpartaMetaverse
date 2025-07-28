@@ -16,7 +16,7 @@ namespace MetaverseSession
         [SerializeField] Button char1;
         [SerializeField] Button char2;
         [SerializeField] Button char3;
-        [SerializeField] List<CharacterBase> characterBases;
+        [SerializeField] List<CharacterBase> characterBases = new List<CharacterBase>();
 
         static int selectedChar = -1;
         public virtual void Init(UIManager uiManager)
