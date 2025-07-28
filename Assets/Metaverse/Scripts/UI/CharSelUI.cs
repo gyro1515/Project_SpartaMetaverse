@@ -18,6 +18,7 @@ namespace MetaverseSession
         [SerializeField] Button char3;
         [SerializeField] List<CharacterBase> characterBases;
 
+        static int selectedChar = -1;
         public virtual void Init(UIManager uiManager)
         {
             this.uiManager = uiManager;
@@ -25,27 +26,36 @@ namespace MetaverseSession
             char1.onClick.AddListener(OnClickSelChar1);
             char2.onClick.AddListener(OnClickSelChar2);
             char3.onClick.AddListener(OnClickSelChar3);
+            
         }
         public void OnClickSelChar1()
         {
-            GameManager.instance.player.SetCharacter(characterBases[0]);
+            selectedChar = 0;
+            SetCharacter();
             SetAcive(false);
         }
         public void OnClickSelChar2()
         {
-            GameManager.instance.player.SetCharacter(characterBases[1]);
+            selectedChar = 1;
+            SetCharacter();
             SetAcive(false);
 
         }
         public void OnClickSelChar3()
         {
-            GameManager.instance.player.SetCharacter(characterBases[2]);
+            selectedChar = 2;
+            SetCharacter();
             SetAcive(false);
 
         }
         void SetAcive(bool active)
         {
             gameObject.SetActive(active);
+        }
+        public void SetCharacter() // 처음 씬 로드될 시, UI매니저에서도 실행됨
+        {
+            if (selectedChar == -1) return;
+            GameManager.instance.player.SetCharacter(characterBases[selectedChar]);
         }
     }
 }

@@ -29,6 +29,8 @@ public class SceneLoader : MonoBehaviour
     /*private const string FlappyBSKey = "FlappyBestScore";
     private const string FlappyCSKey = "FlappyCurScore";*/
 
+    public const string SelCharSKey = "SelectedCharacter";
+
 
     public static bool IsChange { get; private set; } = false; // 씬 전환 시 그 후 상호작용 작동 안하도록
 

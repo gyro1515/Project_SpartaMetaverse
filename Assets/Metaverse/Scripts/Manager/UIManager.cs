@@ -71,7 +71,10 @@ namespace MetaverseSession
             ChangeState(UIState.None); 
 
         }
-
+        private void Start()
+        {
+            charSelUI.SetCharacter();
+        }
         public void ChangeState(UIState state)
         {
             currentState = state;
