@@ -121,3 +121,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterRenderer: {fileID: 7714956236310205846}
   characterAnimator: {fileID: 6137410314763217078}
+  posY: 0.5

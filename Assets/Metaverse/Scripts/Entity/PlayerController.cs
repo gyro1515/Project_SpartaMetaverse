@@ -49,6 +49,7 @@ namespace MetaverseSession
             //Debug.Log("SetCharacter");
             SpriteRenderer tmpSP = GetComponentInChildren<SpriteRenderer>();
             tmpSP.sprite = charBase.characterRenderer.sprite;
+            tmpSP.transform.localPosition = new Vector3(0, charBase.posY, 0);
             Animator tmpAnim = GetComponentInChildren<Animator>();
             tmpAnim.runtimeAnimatorController = charBase.characterAnimator.runtimeAnimatorController;
             characterRenderer = tmpSP;

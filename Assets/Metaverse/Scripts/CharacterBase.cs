@@ -8,5 +8,6 @@ namespace MetaverseSession
     {
         public SpriteRenderer characterRenderer;
         public Animator characterAnimator;
+        public float posY = 0;
     }
 }
