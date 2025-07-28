@@ -22,7 +22,7 @@ namespace MetaverseSession
         public virtual void Init(UIManager uiManager)
         {
             this.uiManager = uiManager;
-            // 델리게이트 추가로 만들어서 어떤 버튼이 눌렸는지 체크해야 하지만 시간이 없는 관계로 함수 3개...
+            // 버튼 재정의 하고 델리게이트 추가로 만들어서 어떤 버튼(index 기반)이 눌렸는지 체크해야 하지만 시간이 없는 관계로 함수 3개...
             char1.onClick.AddListener(OnClickSelChar1);
             char2.onClick.AddListener(OnClickSelChar2);
             char3.onClick.AddListener(OnClickSelChar3);
