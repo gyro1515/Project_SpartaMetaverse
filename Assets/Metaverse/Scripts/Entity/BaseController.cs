@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,7 +10,8 @@ namespace MetaverseSession
     {
         protected Rigidbody2D _rigidbody;
 
-        [SerializeField] private SpriteRenderer characterRenderer;
+        [SerializeField] protected SpriteRenderer characterRenderer;
+        [SerializeField] protected Animator characterAnimator;
 
         protected Vector2 movementDirection = Vector2.zero;
         public Vector2 MovementDirection { get { return movementDirection; } }
@@ -65,16 +66,16 @@ namespace MetaverseSession
         private void Movment(Vector2 direction)
         {
             //direction = direction * statHandler.Speed;
-            direction = direction * 6; // ½ºÇÇµå °íÁ¤
-                  // µ¨Å¸·Î Ã³¸®ÇÏÁö ¾Ê°í, ¹Ù·Î ¼Óµµ ÁöÁ¤ÇØÁÖ±â
+            direction = direction * 6; // ìŠ¤í”¼ë“œ ê³ ì •
+                  // ë¸íƒ€ë¡œ ì²˜ë¦¬í•˜ì§€ ì•Šê³ , ë°”ë¡œ ì†ë„ ì§€ì •í•´ì£¼ê¸°
             _rigidbody.velocity = direction;
             animationHandler.Move(direction);
         }
-        private void Rotate() // ÀÌµ¿ ¹æÇâ¿¡ µû¸¥ È¸Àü
+        private void Rotate() // ì´ë™ ë°©í–¥ì— ë”°ë¥¸ íšŒì „
         {
             if (_rigidbody.velocity.x == 0) return;
 
-            characterRenderer.flipX = _rigidbody.velocity.x < 0; // ÁÂ¿ì ¹İÀü¸¸
+            characterRenderer.flipX = _rigidbody.velocity.x < 0; // ì¢Œìš° ë°˜ì „ë§Œ
         }
         
     }

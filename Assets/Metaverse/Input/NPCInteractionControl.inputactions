@@ -1,0 +1,34 @@
+{
+    "name": "NPCInteractionControl",
+    "maps": [
+        {
+            "name": "NPCInteraction",
+            "id": "7800c469-ed8a-4ff9-b1a4-2fae09ac00b8",
+            "actions": [
+                {
+                    "name": "Interaction",
+                    "type": "Value",
+                    "id": "f36d6850-2267-4c9d-a389-efaa78b16f19",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "206973dc-142a-4748-9156-404df45615bc",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interaction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

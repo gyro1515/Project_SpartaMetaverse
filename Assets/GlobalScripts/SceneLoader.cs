@@ -25,6 +25,11 @@ public class SceneLoader : MonoBehaviour
         { SceneState.FlappyPlane, "FlappyPlaneScene" },
         { SceneState.TheStack,    "TheStackScene" }
     };
+    // 키 모아두기?
+    /*private const string FlappyBSKey = "FlappyBestScore";
+    private const string FlappyCSKey = "FlappyCurScore";*/
+
+
     public static bool IsChange { get; private set; } = false; // 씬 전환 시 그 후 상호작용 작동 안하도록
 
     

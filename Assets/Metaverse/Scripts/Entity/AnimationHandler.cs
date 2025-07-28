@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,8 +6,8 @@ namespace MetaverseSession
 {
     public class AnimationHandler : MonoBehaviour
     {
-        // ¹®ÀÚ¿­ º¸´Ù´Â Æ¯Á¤ ¼ıÀÚ·Î ºñ±³ÇÏ´Â°Ô ³´´Ù.
-        // id °ª ºÎ¿©
+        // ë¬¸ìì—´ ë³´ë‹¤ëŠ” íŠ¹ì • ìˆ«ìë¡œ ë¹„êµí•˜ëŠ”ê²Œ ë‚«ë‹¤.
+        // id ê°’ ë¶€ì—¬
         private static readonly int IsMoving = Animator.StringToHash("IsMove");
         private static readonly int IsDamage = Animator.StringToHash("IsDamage");
         private static readonly int IsJump = Animator.StringToHash("IsJump");

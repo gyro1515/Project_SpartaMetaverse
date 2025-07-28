@@ -48,6 +48,7 @@ namespace FlappyPlaneSession
                 PlayerPrefs.SetInt(BestScoreKey, currentScore);
             }
             PlayerPrefs.SetInt(CurScoreKey, currentScore);
+            Debug.Log($"게임오버 {currentScore} / {isStartOnce}");
             uiManager.SetRestart();
         }
 
@@ -82,8 +83,10 @@ namespace FlappyPlaneSession
             if (!isStartOnce)
             {
                 PlayerPrefs.SetInt(CurScoreKey, currentScore);
-                isStartOnce = false;
             }
+            isStartOnce = false;
+            Debug.Log($"리턴 {currentScore} / {isStartOnce}");
+
             StartCoroutine(SceneLoader.NextSceneSequence(SceneState.Metaverse));
         }
 

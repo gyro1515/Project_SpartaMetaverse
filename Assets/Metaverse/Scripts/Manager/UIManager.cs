@@ -24,6 +24,8 @@ namespace MetaverseSession
         BaseUI stackUI;
         BaseUI topDownUI;
         FinishUI finishUI;
+        CharSelUI charSelUI;
+        public CharSelUI CharSelUI { get { return charSelUI; }}
         private static UIState currentState = UIState.None;
         public static UIState CurrentState
         {
@@ -47,9 +49,17 @@ namespace MetaverseSession
             topDownUI.Init(this);
             finishUI = transform.Find("FinishUI")?.GetComponent<FinishUI>();
             finishUI.Init(this);
+            charSelUI = transform.Find("CharSelUI")?.GetComponent<CharSelUI>();
+            charSelUI.Init(this);
+            if (charSelUI == null)
+            {
+                Debug.Log("null");
+            }
+            else Debug.Log("Notnull");
+              
 
             // 결과 UI 액티브
-            if(currentState != UIState.None)
+            if (currentState != UIState.None)
             {
                 finishUI.gameObject.SetActive(true);
             }

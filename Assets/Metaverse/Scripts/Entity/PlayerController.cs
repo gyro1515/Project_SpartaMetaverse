@@ -44,6 +44,17 @@ namespace MetaverseSession
         {
 
         }
+        public void SetCharacter(CharacterBase charBase)
+        {
+            //Debug.Log("SetCharacter");
+            SpriteRenderer tmpSP = GetComponentInChildren<SpriteRenderer>();
+            tmpSP.sprite = charBase.characterRenderer.sprite;
+            Animator tmpAnim = GetComponentInChildren<Animator>();
+            tmpAnim.runtimeAnimatorController = charBase.characterAnimator.runtimeAnimatorController;
+            characterRenderer = tmpSP;
+            characterAnimator = tmpAnim;
+            // 변경 전 참조 값은 알아서 삭제가 될까?
+        }
         
     }
 }
